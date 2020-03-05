@@ -1,0 +1,4 @@
+module EndpointSecurityPrivate {
+  header "../endpointsecurity.h"
+  export *
+}
