@@ -1,8 +1,7 @@
 ![Cover](assets/cover.png)
 
-### Crescendo is a swift based, real time event viewer for macOS. It utilies Apple's Endpoint Security Framework.
-
 # Table of Contents
+
 1. [Getting Started](#Getting-Started)
 2. [Requirements](#requirements)
 3. [Components](#Components)
@@ -62,11 +61,14 @@ It is _highly_ recommended to test this code in a virtual machine with SIP disab
 csrutil disable
 nvram boot-args="amfi_get_out_of_my_way=0x1"
 ```
+
 3. Reboot
 4. Enable developer mode so our extensions will reload everytime we call `OSSystemExtensionManager.shared.submitRequest`
+
 ```
 systemextensionsctl developer on
 ```
+
 ---
 
 ## Signing
