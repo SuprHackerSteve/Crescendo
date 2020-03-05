@@ -36,7 +36,7 @@
 
 // Needs to be defined for compiling under 10.5 SDK
 #ifndef NSAppKitVersionNumber10_5
-#define NSAppKitVersionNumber10_5 949
+    #define NSAppKitVersionNumber10_5 949
 #endif
 
 // By default, we use a small control/font for the suppression button.
@@ -141,7 +141,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
 
         if (PFUseSmallAlertSuppressCheckbox) {
             NSCell *cell = [[alert suppressionButton] cell];
-            [cell setControlSize:NSControlSizeSmall];
+            [cell setControlSize:NSSmallControlSize];
             [cell setFont:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]]];
         }
     }
@@ -187,7 +187,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
                 }
             }
 
-            if (!CopyBundle(bundlePath, destinationPath)) {
+             if (!CopyBundle(bundlePath, destinationPath)) {
                 NSLog(@"ERROR -- Could not copy myself to %@", destinationPath);
                 goto fail;
             }
@@ -215,7 +215,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
         exit(0);
     }
     // Save the alert suppress preference if checked
-    else if ([[alert suppressionButton] state] == NSControlStateValueOn) {
+    else if ([[alert suppressionButton] state] == NSOnState) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:AlertSuppressKey];
     }
 
@@ -412,9 +412,9 @@ static BOOL Trash(NSString *path) {
         NSAppleScript *appleScript = [[[NSAppleScript alloc] initWithSource:
                                        [NSString stringWithFormat:@"\
                                         set theFile to POSIX file \"%@\" \n\
-                                        tell application \"Finder\" \n\
-                                        move theFile to trash \n\
-                                        end tell", path]] autorelease];
+                                           tell application \"Finder\" \n\
+                                              move theFile to trash \n\
+                                          end tell", path]] autorelease];
         NSDictionary *errorDict = nil;
         NSAppleEventDescriptor *scriptResult = [appleScript executeAndReturnError:&errorDict];
         if (scriptResult == nil) {
@@ -484,8 +484,8 @@ static BOOL AuthorizedInstall(NSString *srcPath, NSString *dstPath, BOOL *cancel
         // they keep the function and throw some sort of exception, this won't fail gracefully, but that's a
         // risk we'll have to take for now.
         security_AuthorizationExecuteWithPrivileges = (OSStatus (*)(AuthorizationRef, const char*,
-                                                                    AuthorizationFlags, char* const*,
-                                                                    FILE **)) dlsym(RTLD_DEFAULT, "AuthorizationExecuteWithPrivileges");
+                                                                   AuthorizationFlags, char* const*,
+                                                                   FILE **)) dlsym(RTLD_DEFAULT, "AuthorizationExecuteWithPrivileges");
     }
     if (!security_AuthorizationExecuteWithPrivileges) goto fail;
 

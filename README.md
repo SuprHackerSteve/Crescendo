@@ -22,13 +22,14 @@
 
 Apple has introduced some new security mechanisms that we need to enable to get Crescendo running.
 
-1. First you will need to approve the system extension (This will prompt when you first run the app and click on "Start"). A popup will guide you to
+1. Ensure that you have moved the app to your /Applications director or the system extension will not load
+2. After running for the first time, you will need to approve the system extension (This will prompt when you first run the app and click on "Start"). A popup will guide you to
 
    _NOTE: I have noticed sometimes that there is some issue where System Preferences won't show an allow button. I assume this is some internal issue Apple needs to workout._
 
    ![Sysext](assets/sysext.png)
 
-2. You will need to enable Full Disk Access for the system extension.
+3. You will need to enable Full Disk Access for the system extension.
 
    ![FullDisk](assets/fulldisk.png)
 
@@ -36,7 +37,7 @@ Apple has introduced some new security mechanisms that we need to enable to get 
 
 ## Requirements
 
-Crescendo is only compatible with >=10.15.X and at least Xcode 10
+Crescendo is only compatible with >=10.15.X and at least Xcode 10.
 
 ---
 
