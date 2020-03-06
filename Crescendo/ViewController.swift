@@ -66,6 +66,7 @@ class ViewController: NSViewController {
         logTableView.target = self
         makeSearchFieldOptions()
         updateTimer = Date()
+
     }
 
     // Helper to move our app to the /Applications folder, since it is a requirement for system extensions
@@ -98,9 +99,10 @@ class ViewController: NSViewController {
     }()
 
     // Helper for reloading events while maintaining selection in tableview
-    func reloadEvents() {
+    // If a caller sets force to true, there will be no time delay on a refresh
+    func reloadEvents(force: Bool) {
         // only reload tableview every 1 second
-        if Date().timeIntervalSince(updateTimer) > 1 {
+        if Date().timeIntervalSince(updateTimer) > 1 || force {
             let row = logTableView.selectedRow
             logTableView.reloadData()
             let indexPath = IndexSet(integer: row)
@@ -139,7 +141,7 @@ class ViewController: NSViewController {
         DispatchQueue.main.async {
             self.savedItems.append(crescendoEvent)
             self.addEventIfFilterIsSet(event: crescendoEvent)
-            self.reloadEvents()
+            self.reloadEvents(force: false)
         }
     }
 
@@ -184,7 +186,7 @@ class ViewController: NSViewController {
         eventProps.stringValue = ""
         searchField.stringValue = ""
         eventFilter.selectSegment(withTag: 0)
-        reloadEvents()
+        reloadEvents(force: true)
     }
 
     // Start button handler
@@ -346,7 +348,7 @@ class ViewController: NSViewController {
             activeItems = activeItems.filter { !$0.signingid.starts(with: "com.apple") }
         default: ()
         }
-        reloadEvents()
+        reloadEvents(force: true)
     }
 
     // Handler for unloading the system extension. This should only be used for extreme situations.
