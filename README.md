@@ -14,7 +14,7 @@
 
 ---
 
-![Crescendo Demo](assets/demo.gif)
+![Crescendo Demo](assets/demo.png)
 
 ---
 
