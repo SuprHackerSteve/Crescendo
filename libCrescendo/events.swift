@@ -157,8 +157,8 @@ extension ESClient {
         }
 
         // search the blacklist first
-        if blacklist.contains(cEvent.processpath) {
-            NSLog("BLOCKED: %@", cEvent.processpath)
+        if blacklist.contains(cEvent.processpath) || blacklist.contains(cEvent.signingid) {
+            NSLog("BLOCKED: %@-%@", cEvent.processpath, cEvent.signingid)
             decision = ES_AUTH_RESULT_DENY
         }
 

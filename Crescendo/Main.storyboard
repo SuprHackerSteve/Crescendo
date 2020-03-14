@@ -321,15 +321,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="915" height="525"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Uc-vc-oTg">
-                                <rect key="frame" x="97" y="1196" width="107" height="16"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Blacklisted Items" id="3lA-gb-jTv">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IGQ-y1-AsQ">
                                 <rect key="frame" x="497" y="489" width="55" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -427,7 +418,6 @@ Gw
                         <outlet property="backButton" destination="N1b-t9-Bx6" id="2F4-FA-mZC"/>
                         <outlet property="itemList" destination="U1d-pp-4R3" id="jWw-Mt-4uU"/>
                         <outlet property="purgeEventCheckbox" destination="Iuk-JN-t25" id="fVi-iv-bVq"/>
-                        <outlet property="saveButton" destination="i43-7m-NH0" id="kvD-fH-tjZ"/>
                     </connections>
                 </viewController>
                 <customObject id="UuM-MQ-knC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

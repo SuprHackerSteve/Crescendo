@@ -21,7 +21,6 @@ class SettingsView: NSViewController, AppCommunication {
 
         if let main = presentingViewController as? ViewController {
             shouldPurge = main.shouldPurgeEvents
-            print(main.shouldPurgeEvents)
         }
         if shouldPurge {
             purgeEventCheckbox.state = .on
@@ -37,7 +36,6 @@ class SettingsView: NSViewController, AppCommunication {
     func saveDismiss() {
         if let main = presentingViewController as? ViewController {
             main.shouldPurgeEvents = shouldPurge
-            print(main.shouldPurgeEvents)
         }
         dismiss(self)
     }
