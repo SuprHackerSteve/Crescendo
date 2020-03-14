@@ -3,6 +3,8 @@ import libCrescendo
 
 @objc protocol ProviderCommunication {
     func register(_ completionHandler: @escaping (Bool) -> Void)
+    func updateBlacklist(items: [String])
+    func getBlacklist(withData response: @escaping ([String]) -> Void)
     func unregister()
 }
 
@@ -15,8 +17,9 @@ class IPCConnection: NSObject {
     var currentConnection: NSXPCConnection?
     weak var delegate: AppCommunication?
     static let shared = IPCConnection()
+    var client: ESClient?
 
-    func startListener() {
+    func startListener(esclient: ESClient) {
         let machServiceName = extensionMachServiceName(from: Bundle.main)
         NSLog("Starting XPC listener for mach service %@", machServiceName)
 
@@ -24,6 +27,7 @@ class IPCConnection: NSObject {
         newListener.delegate = self
         newListener.resume()
         listener = newListener
+        client = esclient
     }
 
     private func extensionMachServiceName(from bundle: Bundle) -> String {
@@ -65,14 +69,48 @@ class IPCConnection: NSObject {
         providerProxy.register(completionHandler)
     }
 
+    func updateBlacklist(blockedItems: [String], delegate: AppCommunication) {
+        guard let connection = currentConnection else {
+            return
+        }
+
+        self.delegate = delegate
+
+        guard let providerProxy = connection.remoteObjectProxyWithErrorHandler({ updateError in
+            NSLog("Failed to update blacklist %@", updateError.localizedDescription)
+            self.currentConnection = nil
+        }) as? ProviderCommunication else {
+            fatalError("Failed to create a remote object proxy for the app")
+        }
+
+        providerProxy.updateBlacklist(items: blockedItems)
+    }
+
+    func getBlackList(delegate: AppCommunication, withData response: @escaping ([String]) -> Void) {
+        guard let connection = currentConnection else {
+            return
+        }
+
+        self.delegate = delegate
+
+        guard let providerProxy = connection.remoteObjectProxyWithErrorHandler({ updateError in
+            NSLog("Failed to get blacklist %@", updateError.localizedDescription)
+            self.currentConnection = nil
+        }) as? ProviderCommunication else {
+            fatalError("Failed to create a remote object proxy for the app")
+        }
+
+        return providerProxy.getBlacklist(withData: response)
+    }
+
     // drop events if no client is connected
     func sendEventToApp(newEvent event: String) {
         guard let connection = currentConnection else {
             return
         }
 
-        guard let appProxy = connection.remoteObjectProxyWithErrorHandler({ promptError in
-            NSLog("Failed to sent event to app %@", promptError.localizedDescription)
+        guard let appProxy = connection.remoteObjectProxyWithErrorHandler({ sendError in
+            NSLog("Failed to sent event to app %@", sendError.localizedDescription)
             self.currentConnection = nil
         }) as? AppCommunication else {
             fatalError("Failed to create a remote object proxy for the app")
@@ -106,6 +144,20 @@ extension IPCConnection: ProviderCommunication {
     func register(_ completionHandler: @escaping (Bool) -> Void) {
         NSLog("App client connected.")
         completionHandler(true)
+    }
+
+    func updateBlacklist(items: [String]) {
+        guard let client = self.client else {
+            return
+        }
+        client.updateCrescendoBlacklist(blockedItems: items)
+    }
+
+    func getBlacklist(withData response: @escaping ([String]) -> Void) {
+        guard let client = self.client else {
+            return
+        }
+        response(client.getCrescendoBlacklist())
     }
 
     func unregister() {

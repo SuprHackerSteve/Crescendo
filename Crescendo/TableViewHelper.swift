@@ -55,7 +55,7 @@ extension ViewController: NSTableViewDataSource {
             return nil
         }
 
-        if row >= self.logTableView.numberOfRows {
+        if row >= logTableView.numberOfRows || row >= activeItems.count {
             return nil
         }
 

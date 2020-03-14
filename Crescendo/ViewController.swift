@@ -18,7 +18,7 @@ class ViewController: NSViewController {
     @IBOutlet var searchBar: NSSearchField!
     @IBOutlet var autoscrollToggle: NSButton!
     @IBOutlet var statusSpinner: NSProgressIndicator!
-
+    @IBOutlet var blacklistButton: NSButton!
     @IBOutlet var eventFilter: NSSegmentedControl!
     @IBOutlet var searchField: NSSearchField!
     @IBOutlet var eventLabel: NSTextField!
@@ -30,6 +30,7 @@ class ViewController: NSViewController {
     var savedItems = [CrescendoEvent]()
     // timer to handle how often we update the tableview
     var updateTimer = Date()
+    var shouldPurgeEvents = true
 
     var status: Status = .stopped {
         didSet {
@@ -39,16 +40,19 @@ class ViewController: NSViewController {
                 statusSpinner.isHidden = true
                 stopButton.isHidden = true
                 startButton.isHidden = false
+                blacklistButton.isEnabled = false
             case .indeterminate:
                 statusSpinner.startAnimation(self)
                 statusSpinner.isHidden = false
                 stopButton.isHidden = true
                 startButton.isHidden = true
+                blacklistButton.isEnabled = false
             case .running:
                 statusSpinner.stopAnimation(self)
                 statusSpinner.isHidden = false
                 stopButton.isHidden = false
                 startButton.isHidden = true
+                blacklistButton.isEnabled = true
             }
             if !statusSpinner.isHidden {
                 statusSpinner.startAnimation(self)
@@ -66,7 +70,6 @@ class ViewController: NSViewController {
         logTableView.target = self
         makeSearchFieldOptions()
         updateTimer = Date()
-
     }
 
     // Helper to move our app to the /Applications folder, since it is a requirement for system extensions
@@ -139,6 +142,11 @@ class ViewController: NSViewController {
 
         // need to ensure we run these on the main thread since they touch UI elements
         DispatchQueue.main.async {
+            // purge at 500k events
+            if self.shouldPurgeEvents, self.savedItems.count >= 10 {
+                self.savedItems.removeAll()
+                self.activeItems.removeAll()
+            }
             self.savedItems.append(crescendoEvent)
             self.addEventIfFilterIsSet(event: crescendoEvent)
             self.reloadEvents(force: false)
@@ -262,6 +270,7 @@ class ViewController: NSViewController {
                 if event.processpath.localizedCaseInsensitiveContains(searchText) {
                     searchBarIsMatched = true
                 }
+
             } else if (searchField.cell as? NSSearchFieldCell)?.placeholderString == "PID" {
                 if String(event.pid).localizedCaseInsensitiveContains(searchText) {
                     searchBarIsMatched = true
