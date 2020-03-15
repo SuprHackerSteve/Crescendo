@@ -13,12 +13,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.setActivationPolicy(.regular)
     }
 
-    func constructMenu() {
+    @objc func showWindow(_ sender: Any?) {
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    func buildMenuBarMenu() {
         let menu = NSMenu()
 
-        menu.addItem(NSMenuItem(title: "Run in Background", action: #selector(hideDockIcon(_:)), keyEquivalent: ""))
-        menu.addItem(NSMenuItem(title: "Show Dock and Window", action: #selector(showDockIcon), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Show App Window", action: #selector(showWindow), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
+
+        menu.addItem(NSMenuItem(title: "Run in Background", action: #selector(hideDockIcon), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Run in Dock", action: #selector(showDockIcon), keyEquivalent: ""))
+        menu.addItem(NSMenuItem.separator())
+
+
         menu.addItem(NSMenuItem(title: "Quit Crescendo",
                                 action: #selector(NSApplication.terminate(_:)),
                                 keyEquivalent: "q"))
@@ -27,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        constructMenu()
+        buildMenuBarMenu()
 
         if let button = menuIcon.button {
             button.image = NSImage(named: NSImage.Name("menuicon"))
