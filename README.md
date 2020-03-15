@@ -101,7 +101,7 @@ I will cut releases for the compiled + signed app and include them in the Releas
 
 ## Troubleshooting
 
-- If you are running on a production Mac, you should disable SIP or AMFI. Those instructions are for developers wishing to make code changes.
+- If you are running on a production Mac, you should _NOT_ disable SIP or AMFI. Those instructions are for developers wishing to make code changes.
 
 - Did you enable the system extension by clicking the "Allow" button in `System Preferences -> Security & Privacy`? If not, you will not see any events.
 
