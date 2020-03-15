@@ -45,10 +45,6 @@ class SettingsView: NSViewController, AppCommunication {
             return
         }
 
-        if entries.string.isEmpty {
-            saveDismiss()
-            return
-        }
         let items = entries.string.components(separatedBy: .newlines)
         var cleanedItems: [String] = []
         // ignore any line returns

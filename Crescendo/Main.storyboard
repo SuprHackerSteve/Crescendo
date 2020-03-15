@@ -321,15 +321,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="915" height="525"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IGQ-y1-AsQ">
-                                <rect key="frame" x="497" y="489" width="55" height="16"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Settings" id="zfO-LC-KmK">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0DX-UT-LU3">
                                 <rect key="frame" x="18" y="444" width="107" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -339,19 +330,19 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1d-pp-4R3">
+                            <scrollView fixedFrame="YES" borderType="line" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1d-pp-4R3">
                                 <rect key="frame" x="20" y="97" width="556" height="339"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="jZz-Wx-Mp1">
-                                    <rect key="frame" x="0.0" y="0.0" width="541" height="339"/>
+                                    <rect key="frame" x="1" y="1" width="539" height="337"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView ambiguous="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="MTF-8A-shy">
-                                            <rect key="frame" x="0.0" y="0.0" width="541" height="339"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="539" height="337"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="541" height="339"/>
+                                            <size key="minSize" width="539" height="337"/>
                                             <size key="maxSize" width="984" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
@@ -362,15 +353,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="GBe-Qz-ArN">
-                                    <rect key="frame" x="541" y="0.0" width="15" height="339"/>
+                                    <rect key="frame" x="540" y="1" width="15" height="337"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qzR-ZO-DXf">
-                                <rect key="frame" x="53" y="73" width="490" height="16"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qzR-ZO-DXf" userLabel="Add file paths or signing ID to prevent from launching.">
+                                <rect key="frame" x="18" y="73" width="530" height="15"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Copy and paste a list of file paths or signing idenitifiers to block from launching. " id="2Df-mh-IuK">
-                                    <font key="font" metaFont="system"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Add file paths or signing ID to prevent from launching. Items should be seperated by newline." id="2Df-mh-IuK" userLabel="Add file paths or signing ID to prevent from launching.">
+                                    <font key="font" metaFont="label" size="12"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -400,7 +391,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N1b-t9-Bx6">
                                 <rect key="frame" x="800" y="13" width="82" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Back" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lRr-ct-GD2">
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lRr-ct-GD2">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <string key="keyEquivalent" base64-UTF8="YES">
@@ -411,6 +402,14 @@ Gw
                                     <action selector="backButton:" target="go7-qE-jxC" id="wmq-RE-HwM"/>
                                 </connections>
                             </button>
+                            <box focusRingType="none" fixedFrame="YES" title="Preferences" translatesAutoresizingMaskIntoConstraints="NO" id="Klo-ub-ZTz">
+                                <rect key="frame" x="-3" y="57" width="921" height="439"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" id="F7U-jw-zfY">
+                                    <rect key="frame" x="3" y="3" width="915" height="421"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </box>
                         </subviews>
                     </view>
                     <connections>
@@ -565,7 +564,7 @@ Gw
                                             <tableColumns>
                                                 <tableColumn identifier="Timestamp" editable="NO" width="162" minWidth="40" maxWidth="1000" id="ScR-Zi-AOx">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Timestamp">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -599,7 +598,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="EventName" editable="NO" width="150" minWidth="40" maxWidth="1000" id="GXO-Kx-IBT">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Event">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -633,7 +632,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="User" editable="NO" width="209" minWidth="40" maxWidth="1000" id="aKt-WY-EJn">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="User">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -667,7 +666,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="PID" editable="NO" width="213" minWidth="40" maxWidth="1000" id="TSc-ah-oYw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PID">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -701,12 +700,12 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="ProcessPath" width="393" minWidth="40" maxWidth="1000" id="2Wz-Qo-cbu">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Process">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" title="Text Cell" id="v6e-sL-eYB">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -734,12 +733,12 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="SigningID" width="315" minWidth="40" maxWidth="1000" id="Ugf-Kt-mv3">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Signing ID">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" title="Text Cell" id="ZEg-jq-ENf">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
