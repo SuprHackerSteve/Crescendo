@@ -22,10 +22,10 @@
 
 Apple has introduced some new security mechanisms that we need to enable to get Crescendo running.
 
-1. Ensure that you have moved the app to your /Applications director or the system extension will fail to loa
-2. After running for the first time, you will need to approve the system extension (This will prompt you during the first run the app after the user clicks the "Start" button).
+1. Ensure that you have moved the app to your /Applications director or the system extension will fail to load.
+2. For the first run you will be prompted to approve the system extension, after clicking the "Start" button.
 
-   _NOTE: I have noticed that there is an issue where System Preferences won't show an allow button. I assume this is some internal issue Apple needs to workout. Clickout back on system preferences and navigating forward again seems to fix the issue._
+   _NOTE: I have noticed that there is an issue where System Preferences won't show an allow button. I assume this is some internal issue Apple needs to workout. Clicking back to System Preferences and navigating forward again seems to fix the issue._
 
    ![Sysext](assets/sysext.png)
 
@@ -74,7 +74,7 @@ systemextensionsctl developer on
 
 ## Signing
 
-If you wish to sign your own application, It is highly recommend reading Apple's documentation on [System Extension](https://developer.apple.com/documentation/systemextensions) requirements and [Notorization](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution).
+If you wish to sign your own application, it is highly recommend to read Apple's documentation on [System Extension](https://developer.apple.com/documentation/systemextensions) requirements and [Notorization](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution).
 
 **Signing and entitlement is a non-trivial exercise.**
 
@@ -86,7 +86,7 @@ I have included my .xproj file in this release to get folks started. In the futu
 
 In order to build this application and run it on a production macOS system, you will need the endpoint-security entitlement and a developer certificate from Apple.
 
-The Crescendo framework can easily be bundled with any swift application. I may move to CocoaPods in the future, but I am unfamiliar with them right now.
+The Crescendo framework can easily be bundled with any Swift application. I may move to CocoaPods in the future, but I am unfamiliar with them right now.
 
 ---
 
