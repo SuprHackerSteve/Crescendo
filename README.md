@@ -28,6 +28,7 @@ Apple has introduced some new security mechanisms that we need to enable to get 
    _NOTE: I have noticed that there is an issue where System Preferences won't show an allow button. I assume this is some internal issue Apple needs to workout. Clicking back to System Preferences and navigating forward again seems to fix the issue._
 
    ![Sysext](assets/sysext.png)
+   ![Allow](assets/allow.png)
 
 3. You will need to enable Full Disk Access for the system extension.
 
