@@ -100,9 +100,15 @@ I will cut releases for the compiled + signed app and include them in the Releas
 
 ## Troubleshooting
 
-If you encounter any issues, open Console.app and search for `crescendo` or `<your_bundle_id>`/`com.suprhackersteve` as a filter, that should assist you in troubleshooting any potential issues. It is also a good idea to check in CrashReporter and see if the extension has crashed or exited with `fatalError`.
+- If you are running on a production Mac, you should disable SIP or AMFI. Those instructions are for developers wishing to make code changes.
 
-If you wish to forcefully unload the system extension, there is a menu item named "Unload System Extension" that will unload it. This action may lead to odd side effects.
+- Did you enable the system extension by clicking the "Allow" button in `System Preferences -> Security & Privacy`? If not, you will not see any events.
+
+- Did you enable full disk access in `System Preferences -> Security & Privacy -> Privacy Tab`? If not, you will not see any events.
+
+* If you encounter any issues, open Console.app and search for `crescendo` or `<your_bundle_id>`/`com.suprhackersteve` as a filter, that should assist you in troubleshooting any potential issues. It is also a good idea to check in CrashReporter and see if the extension has crashed or exited with `fatalError`.
+
+* If you wish to forcefully unload the system extension, there is a menu item named "Unload System Extension" that will unload it. This action may lead to odd side effects, only do it if you know what you are doing.
 
 ---
 
