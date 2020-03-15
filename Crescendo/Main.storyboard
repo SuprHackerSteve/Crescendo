@@ -429,7 +429,7 @@ Gw
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Crescendo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1488" height="815"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1461" height="815"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="xaV-U4-gdx">
@@ -490,20 +490,20 @@ Gw
                                 <autoresizingMask key="autoresizingMask"/>
                             </box>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2a1-ZW-bu9">
-                                <rect key="frame" x="20" y="14" width="1448" height="253"/>
+                                <rect key="frame" x="20" y="14" width="1421" height="253"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" continuous="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" allowsEditingTextAttributes="YES" id="mLd-pn-Pwk">
-                                    <font key="font" size="12" name="Menlo-Regular"/>
+                                    <font key="font" metaFont="fixedUser" size="11"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="yOI-go-Q8S">
-                                <rect key="frame" x="20" y="304" width="1448" height="5"/>
+                                <rect key="frame" x="20" y="304" width="1421" height="5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             </box>
                             <textField identifier="EventLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2md-zU-FaD">
-                                <rect key="frame" x="18" y="286" width="1434" height="16"/>
+                                <rect key="frame" x="18" y="286" width="1425" height="16"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <textFieldCell key="cell" allowsEditingTextAttributes="YES" usesSingleLineMode="YES" id="W8h-dy-TAe">
                                     <font key="font" metaFont="systemBold"/>
@@ -531,18 +531,6 @@ Gw
                                     <action selector="saveEvents:" target="XfG-lQ-9wD" id="yZE-4P-hgm"/>
                                 </connections>
                             </button>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGR-V3-Igg">
-                                <rect key="frame" x="1227" y="776" width="235" height="22"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="Z1m-dc-NwW">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <connections>
-                                        <action selector="searchFieldChange:" target="XfG-lQ-9wD" id="2k8-sg-rsl"/>
-                                    </connections>
-                                </searchFieldCell>
-                            </searchField>
                             <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sYN-Is-eb5">
                                 <rect key="frame" x="382" y="775" width="457" height="23"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -562,14 +550,14 @@ Gw
                                 </connections>
                             </segmentedControl>
                             <scrollView canDrawConcurrently="YES" fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbR-b7-BJP">
-                                <rect key="frame" x="1" y="315" width="1487" height="442"/>
+                                <rect key="frame" x="1" y="315" width="1460" height="442"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="5Ui-kc-ZnF">
-                                    <rect key="frame" x="0.0" y="0.0" width="1487" height="442"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1460" height="442"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView canDrawConcurrently="YES" verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" rowSizeStyle="automatic" headerView="SVM-1g-ztt" viewBased="YES" id="9dG-4t-G78">
-                                            <rect key="frame" x="0.0" y="0.0" width="1487" height="417"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1460" height="417"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -744,7 +732,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="SigningID" width="342" minWidth="40" maxWidth="1000" id="Ugf-Kt-mv3">
+                                                <tableColumn identifier="SigningID" width="315" minWidth="40" maxWidth="1000" id="Ugf-Kt-mv3">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Signing ID">
                                                         <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -758,11 +746,11 @@ Gw
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="nKW-9O-z2X">
-                                                            <rect key="frame" x="1143" y="1" width="342" height="17"/>
+                                                            <rect key="frame" x="1143" y="1" width="315" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24p-51-ke5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="htB-ug-rg1">
                                                                         <font key="font" size="12" name="Menlo-Regular"/>
@@ -790,7 +778,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="SVM-1g-ztt">
-                                    <rect key="frame" x="0.0" y="0.0" width="1487" height="25"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1460" height="25"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -805,6 +793,18 @@ Gw
                                     <segue destination="go7-qE-jxC" kind="sheet" id="FHF-c0-Ae9"/>
                                 </connections>
                             </button>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGR-V3-Igg">
+                                <rect key="frame" x="1206" y="777" width="235" height="22"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="Z1m-dc-NwW">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <connections>
+                                        <action selector="searchFieldChange:" target="XfG-lQ-9wD" id="2k8-sg-rsl"/>
+                                    </connections>
+                                </searchFieldCell>
+                            </searchField>
                         </subviews>
                     </view>
                     <connections>
@@ -824,7 +824,7 @@ Gw
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="60" y="1002"/>
+            <point key="canvasLocation" x="46.5" y="1001.5"/>
         </scene>
     </scenes>
 </document>

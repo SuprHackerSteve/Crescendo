@@ -54,8 +54,7 @@ public class ESClient {
     var client: OpaquePointer?
     var connected: Bool
     var callback: (CrescendoEvent) -> Void
-    let subEvents = [ES_EVENT_TYPE_NOTIFY_EXEC,
-                     ES_EVENT_TYPE_AUTH_EXEC,
+    let subEvents = [ES_EVENT_TYPE_AUTH_EXEC,
                      ES_EVENT_TYPE_NOTIFY_CREATE,
                      ES_EVENT_TYPE_NOTIFY_KEXTLOAD,
                      ES_EVENT_TYPE_NOTIFY_MOUNT,
@@ -164,9 +163,6 @@ public class ESClient {
 
         switch msg.pointee.event_type {
         case ES_EVENT_TYPE_AUTH_EXEC:
-            cEvent.eventtype = "process::exec::block"
-            handleBlockAction(msg: msg, cEvent: &cEvent)
-        case ES_EVENT_TYPE_NOTIFY_EXEC:
             cEvent.eventtype = "process::exec"
             parseProcEvent(msg: msg, cEvent: &cEvent)
         case ES_EVENT_TYPE_NOTIFY_CREATE:

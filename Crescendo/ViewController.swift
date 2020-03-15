@@ -127,7 +127,7 @@ class ViewController: NSViewController {
 
     // Handles deserialization of income events and stores into our event array
     func logEvent(event: String) {
-        // drop events if we are stopped
+        // Drop events if we are stopped
         if status == .stopped {
             return
         }
@@ -140,12 +140,17 @@ class ViewController: NSViewController {
             return
         }
 
-        // need to ensure we run these on the main thread since they touch UI elements
+        // Need to ensure we run these on the main thread since they touch UI elements
         DispatchQueue.main.async {
-            // purge at 500k events
-            if self.shouldPurgeEvents, self.savedItems.count >= 10 {
-                self.savedItems.removeAll()
-                self.activeItems.removeAll()
+            // purge at 500k events if user has chosen. May make the count a user setting in future.
+            if self.shouldPurgeEvents, self.savedItems.count >= (1000 * 500) {
+                // purge first half of events from buffer
+                self.savedItems.removeFirst(self.savedItems.count / 2)
+                // activeItems could be a subset of saveItems due to filtering.
+                // Check that we have at least 2 elements
+                if self.activeItems.count >= 2 {
+                    self.activeItems.removeFirst(self.activeItems.count / 2)
+                }
             }
             self.savedItems.append(crescendoEvent)
             self.addEventIfFilterIsSet(event: crescendoEvent)

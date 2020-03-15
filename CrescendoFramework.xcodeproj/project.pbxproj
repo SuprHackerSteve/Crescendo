@@ -481,7 +481,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = AD94776VX5;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -492,7 +492,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Crescendo/Crescendo-Bridging-Header.h";
@@ -511,7 +511,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = AD94776VX5;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -522,7 +522,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -662,6 +662,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = AD94776VX5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -679,7 +680,7 @@
 					"$(SDKROOT)/usr/lib/swift",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				MODULEMAP_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -698,6 +699,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = AD94776VX5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -715,7 +717,7 @@
 					"$(SDKROOT)/usr/lib/swift",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				MODULEMAP_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -731,7 +733,7 @@
 				CODE_SIGN_ENTITLEMENTS = CrescendoExtension/CrescendoExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = AD94776VX5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CrescendoExtension/Info.plist;
@@ -741,7 +743,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.4;
 				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo.CrescendoExtension;
 				PRODUCT_NAME = com.suprhackersteve.crescendo.CrescendoExtension;
@@ -757,7 +759,7 @@
 				CODE_SIGN_ENTITLEMENTS = CrescendoExtension/CrescendoExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = AD94776VX5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CrescendoExtension/Info.plist;
@@ -767,7 +769,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.4;
 				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo.CrescendoExtension;
 				PRODUCT_NAME = com.suprhackersteve.crescendo.CrescendoExtension;

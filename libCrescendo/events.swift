@@ -3,13 +3,6 @@ import Foundation
 import EndpointSecurityPrivate
 
 extension ESClient {
-    func parseProcEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        if let proc: es_process_t = msg.pointee.process?.pointee {
-            cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
-        }
-        callback(cEvent)
-    }
-
     func parseForkEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
         let forkedProc: es_event_fork_t = msg.pointee.event.fork
         if let proc = forkedProc.child?.pointee {
@@ -143,26 +136,26 @@ extension ESClient {
         callback(cEvent)
     }
 
-    func handleBlockAction(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
+    func parseProcEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
         var decision = ES_AUTH_RESULT_ALLOW
 
         if let proc: es_process_t = msg.pointee.process?.pointee {
             cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
         }
 
-        // bail if we have empty lists
-        if blacklist.isEmpty {
-            es_respond_auth_result(client!, msg, decision, false)
-            return
-        }
-
-        // search the blacklist first
+        // Likely will need to be more complex about what I'm checking in the future.
         if blacklist.contains(cEvent.processpath) || blacklist.contains(cEvent.signingid) {
             NSLog("BLOCKED: %@-%@", cEvent.processpath, cEvent.signingid)
             decision = ES_AUTH_RESULT_DENY
         }
 
         // do not cache for now, may consider making this an option
-        es_respond_auth_result(client!, msg, decision, false)
+        let ret = es_respond_auth_result(client!, msg, decision, false)
+        if ret != ES_RESPOND_RESULT_SUCCESS {
+            NSLog("Error from es_respond_auth_result: %d.", ret.rawValue)
+        }
+
+        cEvent.props["action"] = decision == ES_AUTH_RESULT_ALLOW ? "ES_AUTH_RESULT_ALLOW" : "ES_AUTH_RESULT_DENY"
+        callback(cEvent)
     }
 }
