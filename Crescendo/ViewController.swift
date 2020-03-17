@@ -197,8 +197,6 @@ class ViewController: NSViewController {
         savedItems.removeAll()
         eventLabel.stringValue = ""
         eventProps.stringValue = ""
-        searchField.stringValue = ""
-        eventFilter.selectSegment(withTag: 0)
         reloadEvents(force: true)
     }
 

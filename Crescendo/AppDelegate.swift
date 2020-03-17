@@ -27,7 +27,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem(title: "Run in Dock", action: #selector(showDockIcon), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
 
-
         menu.addItem(NSMenuItem(title: "Quit Crescendo",
                                 action: #selector(NSApplication.terminate(_:)),
                                 keyEquivalent: "q"))
