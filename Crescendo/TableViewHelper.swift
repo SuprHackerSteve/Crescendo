@@ -62,7 +62,12 @@ extension ViewController: NSTableViewDataSource {
         let event = activeItems[row]
 
         if tableColumn == tableView.tableColumns[0] {
-            text = String(event.timestamp)
+            let date = Date(timeIntervalSince1970: TimeInterval(event.timestamp) / 1000)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM-dd-y H:m:ss.SSSS"
+            dateFormatter.timeZone = .current
+            let local = dateFormatter.string(from: date)
+            text = local
             cellIdentifier = CellIdentifiers.timestamp
         } else if tableColumn == tableView.tableColumns[1] {
             text = event.eventtype

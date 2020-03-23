@@ -156,7 +156,7 @@ public class ESClient {
         cEvent.processpath = getString(tok: path)
         cEvent.pid = audit_token_to_pid(proc.audit_token)
         cEvent.ppid = proc.ppid
-        cEvent.timestamp = Int(msg.pointee.time.tv_sec * 1000) + Int(msg.pointee.time.tv_nsec / 1000)
+        cEvent.timestamp = Int(msg.pointee.time.tv_sec * 1000) + Int(msg.pointee.time.tv_nsec / (1000 * 1000))
         cEvent.username = getUsername(id: audit_token_to_euid(proc.audit_token))
         cEvent.isplatform = proc.is_platform_binary
         cEvent.signingid = getString(tok: proc.signing_id)
