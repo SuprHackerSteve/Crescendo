@@ -3,7 +3,8 @@ import SystemExtensions
 
 import libCrescendo
 
-// swiftlint:disable:next type_body_length
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 class ViewController: NSViewController {
     enum Status {
         case stopped

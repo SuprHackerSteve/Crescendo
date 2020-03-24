@@ -5,9 +5,9 @@ import EndpointSecurityPrivate
 extension ESClient {
     func parseForkEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
         let forkedProc: es_event_fork_t = msg.pointee.event.fork
-        if let proc = forkedProc.child?.pointee {
-            cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
-        }
+        let proc = forkedProc.child.pointee
+        cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
+
         callback(cEvent)
     }
 
@@ -56,9 +56,10 @@ extension ESClient {
         IPCEvent["domain"] = domainString
         IPCEvent["proto"] = protoString
         IPCEvent["type"] = typeString
-        if let file: es_file_t = conn.file?.pointee {
-            IPCEvent["path"] = getString(tok: file.path)
-        }
+
+        let file: es_file_t = conn.file.pointee
+        IPCEvent["path"] = getString(tok: file.path)
+
         cEvent.props = IPCEvent
 
         callback(cEvent)
@@ -67,10 +68,10 @@ extension ESClient {
     func parseFileEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
         var fileEvent: Dictionary = [String: String]()
 
-        if let file: es_file_t = msg.pointee.event.create.destination.new_path.dir?.pointee {
-            fileEvent["path"] = getString(tok: file.path)
-            fileEvent["size"] = String(file.stat.st_size)
-        }
+        let file: es_file_t = msg.pointee.event.create.destination.new_path.dir.pointee
+        fileEvent["path"] = getString(tok: file.path)
+        fileEvent["size"] = String(file.stat.st_size)
+
         cEvent.props = fileEvent
 
         callback(cEvent)
@@ -79,16 +80,15 @@ extension ESClient {
     func parseRenameEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
         var fileEvent: Dictionary = [String: String]()
 
-        if let file: es_file_t = msg.pointee.event.rename.source?.pointee {
-            fileEvent["srcpath"] = getString(tok: file.path)
-            fileEvent["srcsize"] = String(file.stat.st_size)
-        }
+        let file: es_file_t = msg.pointee.event.rename.source.pointee
+        fileEvent["srcpath"] = getString(tok: file.path)
+        fileEvent["srcsize"] = String(file.stat.st_size)
+
         fileEvent["desttype"] = String(msg.pointee.event.rename.destination_type.rawValue)
         fileEvent["destfile"] = getString(tok: msg.pointee.event.rename.destination.new_path.filename)
 
-        if let dstfile: es_file_t = msg.pointee.event.rename.destination.existing_file?.pointee {
-            fileEvent["destdir"] = getString(tok: dstfile.path)
-        }
+        let dstfile: es_file_t = msg.pointee.event.rename.destination.existing_file.pointee
+        fileEvent["destdir"] = getString(tok: dstfile.path)
 
         cEvent.props = fileEvent
 
@@ -107,14 +107,13 @@ extension ESClient {
     func parseMountEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
         var mountEvent: Dictionary = [String: String]()
 
-        if var remoteBytes = msg.pointee.event.mount.statfs?.pointee.f_mntonname {
-            let remoteName = String(cString: UnsafeRawPointer(&remoteBytes).assumingMemoryBound(to: CChar.self))
-            mountEvent["remotename"] = remoteName
-        }
-        if var localBytes = msg.pointee.event.mount.statfs?.pointee.f_mntonname {
-            let localName = String(cString: UnsafeRawPointer(&localBytes).assumingMemoryBound(to: CChar.self))
-            mountEvent["localname"] = localName
-        }
+        let remoteBytes = msg.pointee.event.mount.statfs.pointee.f_mntonname
+        let remoteName = String(tupleOfCChars: remoteBytes)
+        mountEvent["remotename"] = remoteName
+
+        let localBytes = msg.pointee.event.mount.statfs.pointee.f_mntonname
+        let localName = String(tupleOfCChars: localBytes)
+        mountEvent["localname"] = localName
 
         cEvent.props = mountEvent
 
@@ -124,12 +123,11 @@ extension ESClient {
     func parseUnlinkEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
         var deleteEvent: Dictionary = [String: String]()
 
-        if let dir = msg.pointee.event.unlink.parent_dir?.pointee.path {
-            deleteEvent["dir"] = getString(tok: dir)
-        }
-        if let path = msg.pointee.event.unlink.target?.pointee.path {
-            deleteEvent["path"] = getString(tok: path)
-        }
+        let dir = msg.pointee.event.unlink.parent_dir.pointee.path
+        deleteEvent["dir"] = getString(tok: dir)
+
+        let path = msg.pointee.event.unlink.target.pointee.path
+        deleteEvent["path"] = getString(tok: path)
 
         cEvent.props = deleteEvent
 
@@ -139,9 +137,8 @@ extension ESClient {
     func parseProcEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
         var decision = ES_AUTH_RESULT_ALLOW
 
-        if let proc: es_process_t = msg.pointee.process?.pointee {
-            cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
-        }
+        let proc: es_process_t = msg.pointee.process.pointee
+        cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
 
         // Likely will need to be more complex about what I'm checking in the future.
         if blacklist.contains(cEvent.processpath) || blacklist.contains(cEvent.signingid) {

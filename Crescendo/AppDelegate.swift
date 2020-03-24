@@ -2,18 +2,17 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
     let menuIcon = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
-    @objc func hideDockIcon(_ sender: Any?) {
+    @objc func hideDockIcon(_: Any?) {
         NSApp.setActivationPolicy(.accessory)
     }
 
-    @objc func showDockIcon(_ sender: Any?) {
+    @objc func showDockIcon(_: Any?) {
         NSApp.setActivationPolicy(.regular)
     }
 
-    @objc func showWindow(_ sender: Any?) {
+    @objc func showWindow(_: Any?) {
         NSApp.activate(ignoringOtherApps: true)
     }
 
@@ -34,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menuIcon.menu = menu
     }
 
-    func applicationDidFinishLaunching(_ notification: Notification) {
+    func applicationDidFinishLaunching(_: Notification) {
         buildMenuBarMenu()
 
         if let button = menuIcon.button {

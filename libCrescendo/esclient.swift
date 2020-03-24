@@ -100,9 +100,7 @@ public class ESClient {
                 exit(EXIT_FAILURE)
             }
 
-            let events: UnsafeMutablePointer = UnsafeMutablePointer(mutating: self.subEvents)
-
-            let ret = es_subscribe(client!, events, UInt32(self.subEvents.count))
+            let ret = es_subscribe(client!, self.subEvents, UInt32(self.subEvents.count))
             if ret != ES_RETURN_SUCCESS {
                 err = ESClientError.failedSubscription
                 NSLog("Failed to subscribe to event source: \(ret)")
@@ -135,23 +133,15 @@ public class ESClient {
         connected = false
     }
 
-    // swiftlint:disable:next cyclomatic_complexity function_body_length
     func eventDispatcher(msg: UnsafePointer<es_message_t>) {
         // Right now we are using the notify version of listeners, could change this in future
         // to support the auth versions. My concern for using auth is we are in a blocking path
         // any user provided callbacks will block pending io.
 
-        guard let proc: es_process_t = msg.pointee.process?.pointee else {
-            NSLog("Got bad event from ES")
-            return
-        }
-
+        let proc: es_process_t = msg.pointee.process.pointee
         var cEvent = CrescendoEvent()
 
-        guard let path = proc.executable?.pointee.path else {
-            NSLog("Missing executable path")
-            return
-        }
+        let path = proc.executable.pointee.path
 
         cEvent.processpath = getString(tok: path)
         cEvent.pid = audit_token_to_pid(proc.audit_token)
