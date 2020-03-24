@@ -19,13 +19,13 @@ autoreleasepool {
         IPCConnection.shared.sendEventToApp(newEvent: json)
     }
 
-    let client = enableCrescendo(completion: sender)
-    if client.error != CrescendoError.success {
+    let esclient = enableCrescendo(completion: sender)
+    if esclient.error != CrescendoError.success {
         NSLog("Failed to create Crescendo listener.")
         exit(EXIT_FAILURE)
     }
 
-    IPCConnection.shared.startListener()
+    IPCConnection.shared.startListener(esclient: esclient.client)
 }
 
 dispatchMain()

@@ -3,7 +3,8 @@ import SystemExtensions
 
 import libCrescendo
 
-// swiftlint:disable:next type_body_length
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
 class ViewController: NSViewController {
     enum Status {
         case stopped
@@ -18,7 +19,7 @@ class ViewController: NSViewController {
     @IBOutlet var searchBar: NSSearchField!
     @IBOutlet var autoscrollToggle: NSButton!
     @IBOutlet var statusSpinner: NSProgressIndicator!
-
+    @IBOutlet var blacklistButton: NSButton!
     @IBOutlet var eventFilter: NSSegmentedControl!
     @IBOutlet var searchField: NSSearchField!
     @IBOutlet var eventLabel: NSTextField!
@@ -30,6 +31,7 @@ class ViewController: NSViewController {
     var savedItems = [CrescendoEvent]()
     // timer to handle how often we update the tableview
     var updateTimer = Date()
+    var shouldPurgeEvents = true
 
     var status: Status = .stopped {
         didSet {
@@ -39,16 +41,19 @@ class ViewController: NSViewController {
                 statusSpinner.isHidden = true
                 stopButton.isHidden = true
                 startButton.isHidden = false
+                blacklistButton.isEnabled = false
             case .indeterminate:
                 statusSpinner.startAnimation(self)
                 statusSpinner.isHidden = false
                 stopButton.isHidden = true
                 startButton.isHidden = true
+                blacklistButton.isEnabled = false
             case .running:
                 statusSpinner.stopAnimation(self)
                 statusSpinner.isHidden = false
                 stopButton.isHidden = false
                 startButton.isHidden = true
+                blacklistButton.isEnabled = true
             }
             if !statusSpinner.isHidden {
                 statusSpinner.startAnimation(self)
@@ -66,7 +71,6 @@ class ViewController: NSViewController {
         logTableView.target = self
         makeSearchFieldOptions()
         updateTimer = Date()
-
     }
 
     // Helper to move our app to the /Applications folder, since it is a requirement for system extensions
@@ -124,7 +128,7 @@ class ViewController: NSViewController {
 
     // Handles deserialization of income events and stores into our event array
     func logEvent(event: String) {
-        // drop events if we are stopped
+        // Drop events if we are stopped
         if status == .stopped {
             return
         }
@@ -137,8 +141,18 @@ class ViewController: NSViewController {
             return
         }
 
-        // need to ensure we run these on the main thread since they touch UI elements
+        // Need to ensure we run these on the main thread since they touch UI elements
         DispatchQueue.main.async {
+            // purge at 500k events if user has chosen. May make the count a user setting in future.
+            if self.shouldPurgeEvents, self.savedItems.count >= (1000 * 500) {
+                // purge first half of events from buffer
+                self.savedItems.removeFirst(self.savedItems.count / 2)
+                // activeItems could be a subset of saveItems due to filtering.
+                // Check that we have at least 2 elements
+                if self.activeItems.count >= 2 {
+                    self.activeItems.removeFirst(self.activeItems.count / 2)
+                }
+            }
             self.savedItems.append(crescendoEvent)
             self.addEventIfFilterIsSet(event: crescendoEvent)
             self.reloadEvents(force: false)
@@ -184,8 +198,6 @@ class ViewController: NSViewController {
         savedItems.removeAll()
         eventLabel.stringValue = ""
         eventProps.stringValue = ""
-        searchField.stringValue = ""
-        eventFilter.selectSegment(withTag: 0)
         reloadEvents(force: true)
     }
 
@@ -262,6 +274,7 @@ class ViewController: NSViewController {
                 if event.processpath.localizedCaseInsensitiveContains(searchText) {
                     searchBarIsMatched = true
                 }
+
             } else if (searchField.cell as? NSSearchFieldCell)?.placeholderString == "PID" {
                 if String(event.pid).localizedCaseInsensitiveContains(searchText) {
                     searchBarIsMatched = true

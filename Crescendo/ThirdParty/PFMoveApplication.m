@@ -141,7 +141,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
 
         if (PFUseSmallAlertSuppressCheckbox) {
             NSCell *cell = [[alert suppressionButton] cell];
-            [cell setControlSize:NSSmallControlSize];
+            [cell setControlSize:NSControlSizeSmall];
             [cell setFont:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]]];
         }
     }
@@ -215,7 +215,7 @@ void PFMoveToApplicationsFolderIfNecessary(void) {
         exit(0);
     }
     // Save the alert suppress preference if checked
-    else if ([[alert suppressionButton] state] == NSOnState) {
+    else if ([[alert suppressionButton] state] == NSControlStateValueOn) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:AlertSuppressKey];
     }
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0813A15F240DB2F2009F84E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0813A15E240DB2F2009F84E1 /* Images.xcassets */; };
+		08599B34241D2CCF000AD203 /* events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08599B33241D2CCF000AD203 /* events.swift */; };
+		08599B3A241D432A000AD203 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08599B39241D432A000AD203 /* Settings.swift */; };
 		08712F752410874D0086A73D /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 08712F742410874D0086A73D /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		08B342762405AA7800457332 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B342742405AA5400457332 /* libbsm.tbd */; };
 		08B3427A2406E3B000457332 /* SystemExtensionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B342792406E3B000457332 /* SystemExtensionHelpers.swift */; };
@@ -77,6 +79,8 @@
 
 /* Begin PBXFileReference section */
 		0813A15E240DB2F2009F84E1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		08599B33241D2CCF000AD203 /* events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = events.swift; sourceTree = "<group>"; };
+		08599B39241D432A000AD203 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		08712F722410874B0086A73D /* Crescendo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Crescendo-Bridging-Header.h"; sourceTree = "<group>"; };
 		08712F732410874C0086A73D /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PFMoveApplication.h; path = ThirdParty/PFMoveApplication.h; sourceTree = "<group>"; };
 		08712F742410874D0086A73D /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PFMoveApplication.m; path = ThirdParty/PFMoveApplication.m; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			children = (
 				08712F732410874C0086A73D /* PFMoveApplication.h */,
 				08712F742410874D0086A73D /* PFMoveApplication.m */,
+				08599B39241D432A000AD203 /* Settings.swift */,
 				4C2669C323F203140073CB7A /* CrescendoApp.entitlements */,
 				4C26976823BCFDDB0031487C /* AppDelegate.swift */,
 				4C4DEEA223F227CD00AE279A /* Main.storyboard */,
@@ -196,6 +201,7 @@
 			children = (
 				4C48C4F623BB829200A5B781 /* crescendo.swift */,
 				4C4A4BD123BBA94E00D61172 /* esclient.swift */,
+				08599B33241D2CCF000AD203 /* events.swift */,
 				4C48C4E023BB827B00A5B781 /* Info.plist */,
 				4C45740723C2A1F600BDECF7 /* utils.swift */,
 				4C48C51023BB90C300A5B781 /* crescendo.h */,
@@ -328,7 +334,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				TargetAttributes = {
 					4C26976523BCFDDB0031487C = {
 						CreatedOnToolsVersion = 11.3;
@@ -420,6 +426,7 @@
 				08B3427C2406E42F00457332 /* TableViewHelper.swift in Sources */,
 				4C26976923BCFDDB0031487C /* AppDelegate.swift in Sources */,
 				08712F752410874D0086A73D /* PFMoveApplication.m in Sources */,
+				08599B3A241D432A000AD203 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +434,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08599B34241D2CCF000AD203 /* events.swift in Sources */,
 				4C45740823C2A1F600BDECF7 /* utils.swift in Sources */,
 				4C4A4BD223BBA94E00D61172 /* esclient.swift in Sources */,
 				4C48C4F723BB829200A5B781 /* crescendo.swift in Sources */,
@@ -484,7 +492,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Crescendo/Crescendo-Bridging-Header.h";
@@ -514,7 +522,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -558,7 +566,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = crescendo.entitlements;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -623,7 +631,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = crescendo.entitlements;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -651,13 +659,14 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = AD94776VX5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 25;
+				DYLIB_CURRENT_VERSION = 5;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = libCrescendo/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -671,7 +680,7 @@
 					"$(SDKROOT)/usr/lib/swift",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				MODULEMAP_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -687,13 +696,14 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = AD94776VX5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 25;
+				DYLIB_CURRENT_VERSION = 5;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = libCrescendo/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -707,7 +717,7 @@
 					"$(SDKROOT)/usr/lib/swift",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				MODULEMAP_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -733,7 +743,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo.CrescendoExtension;
 				PRODUCT_NAME = com.suprhackersteve.crescendo.CrescendoExtension;
@@ -759,7 +769,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.crescendo.CrescendoExtension;
 				PRODUCT_NAME = com.suprhackersteve.crescendo.CrescendoExtension;

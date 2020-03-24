@@ -54,7 +54,7 @@ public class ESClient {
     var client: OpaquePointer?
     var connected: Bool
     var callback: (CrescendoEvent) -> Void
-    let subEvents = [ES_EVENT_TYPE_NOTIFY_EXEC,
+    let subEvents = [ES_EVENT_TYPE_AUTH_EXEC,
                      ES_EVENT_TYPE_NOTIFY_CREATE,
                      ES_EVENT_TYPE_NOTIFY_KEXTLOAD,
                      ES_EVENT_TYPE_NOTIFY_MOUNT,
@@ -62,6 +62,8 @@ public class ESClient {
                      ES_EVENT_TYPE_NOTIFY_UIPC_CONNECT,
                      ES_EVENT_TYPE_NOTIFY_FORK,
                      ES_EVENT_TYPE_NOTIFY_UNLINK]
+
+    var blacklist: [String] = []
 
     init(completion: @escaping (CrescendoEvent) -> Void) {
         connected = false
@@ -75,7 +77,7 @@ public class ESClient {
         var err = ESClientError.success
 
         if connected {
-            NSLog("Client already connected.")
+            NSLog("ESClient already connected.")
             return err
         }
 
@@ -98,9 +100,7 @@ public class ESClient {
                 exit(EXIT_FAILURE)
             }
 
-            let events: UnsafeMutablePointer = UnsafeMutablePointer(mutating: self.subEvents)
-
-            let ret = es_subscribe(client!, events, UInt32(self.subEvents.count))
+            let ret = es_subscribe(client!, self.subEvents, UInt32(self.subEvents.count))
             if ret != ES_RETURN_SUCCESS {
                 err = ESClientError.failedSubscription
                 NSLog("Failed to subscribe to event source: \(ret)")
@@ -111,6 +111,15 @@ public class ESClient {
             self.connected = true
         }
         return err
+    }
+
+    public func updateCrescendoBlacklist(blockedItems: [String]) {
+        NSLog("Updating blacklist items with %d items.", blockedItems.count)
+        blacklist = blockedItems
+    }
+
+    public func getCrescendoBlacklist() -> [String] {
+        return blacklist
     }
 
     func stopEventProducer() {
@@ -124,174 +133,26 @@ public class ESClient {
         connected = false
     }
 
-    func parseProcEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        if let proc: es_process_t = msg.pointee.process?.pointee {
-            cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
-        }
-        callback(cEvent)
-    }
-
-    func parseForkEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        let forkedProc: es_event_fork_t = msg.pointee.event.fork
-        if let proc = forkedProc.child?.pointee {
-            cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
-        }
-        callback(cEvent)
-    }
-
-    // swiftlint:disable:next cyclomatic_complexity
-    func parseIPCEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        var IPCEvent: Dictionary = [String: String]()
-
-        let conn: es_event_uipc_connect_t = msg.pointee.event.uipc_connect
-        var domainString: String
-        var typeString: String
-        var protoString: String
-
-        switch conn.domain {
-        case AF_UNIX:
-            domainString = "AF_UNIX"
-        case AF_INET:
-            domainString = "AF_INET"
-        case AF_LOCAL:
-            domainString = "AF_LOCAL"
-        default:
-            domainString = String(conn.domain)
-        }
-
-        switch conn.type {
-        case SOCK_STREAM:
-            typeString = "SOCK_STREAM"
-        case SOCK_DGRAM:
-            typeString = "SOCK_DGRAM"
-        case SOCK_RAW:
-            typeString = "SOCK_RAW"
-        default:
-            typeString = String(conn.type)
-        }
-
-        switch conn.protocol {
-        case IPPROTO_IP:
-            protoString = "IPPROTO_IP"
-        case IPPROTO_UDP:
-            protoString = "IPPROTO_UDP"
-        case IPPROTO_TCP:
-            protoString = "IPPROTO_TCP"
-        default:
-            protoString = String(conn.protocol)
-        }
-
-        IPCEvent["domain"] = domainString
-        IPCEvent["proto"] = protoString
-        IPCEvent["type"] = typeString
-        if let file: es_file_t = conn.file?.pointee {
-            IPCEvent["path"] = getString(tok: file.path)
-        }
-        cEvent.props = IPCEvent
-
-        callback(cEvent)
-    }
-
-    func parseFileEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        var fileEvent: Dictionary = [String: String]()
-
-        if let file: es_file_t = msg.pointee.event.create.destination.new_path.dir?.pointee {
-            fileEvent["path"] = getString(tok: file.path)
-            fileEvent["size"] = String(file.stat.st_size)
-        }
-        cEvent.props = fileEvent
-
-        callback(cEvent)
-    }
-
-    func parseRenameEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        var fileEvent: Dictionary = [String: String]()
-
-        if let file: es_file_t = msg.pointee.event.rename.source?.pointee {
-            fileEvent["srcpath"] = getString(tok: file.path)
-            fileEvent["srcsize"] = String(file.stat.st_size)
-        }
-        fileEvent["desttype"] = String(msg.pointee.event.rename.destination_type.rawValue)
-        fileEvent["destfile"] = getString(tok: msg.pointee.event.rename.destination.new_path.filename)
-
-        if let dstfile: es_file_t = msg.pointee.event.rename.destination.existing_file?.pointee {
-            fileEvent["destdir"] = getString(tok: dstfile.path)
-        }
-
-        cEvent.props = fileEvent
-
-        callback(cEvent)
-    }
-
-    func parseKextEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        var kextEvent: Dictionary = [String: String]()
-        kextEvent["identifier"] = getString(tok: msg.pointee.event.kextload.identifier)
-
-        cEvent.props = kextEvent
-
-        callback(cEvent)
-    }
-
-    func parseMountEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        var mountEvent: Dictionary = [String: String]()
-
-        if var remoteBytes = msg.pointee.event.mount.statfs?.pointee.f_mntonname {
-            let remoteName = String(cString: UnsafeRawPointer(&remoteBytes).assumingMemoryBound(to: CChar.self))
-            mountEvent["remotename"] = remoteName
-        }
-        if var localBytes = msg.pointee.event.mount.statfs?.pointee.f_mntonname {
-            let localName = String(cString: UnsafeRawPointer(&localBytes).assumingMemoryBound(to: CChar.self))
-            mountEvent["localname"] = localName
-        }
-
-        cEvent.props = mountEvent
-
-        callback(cEvent)
-    }
-
-    func parseUnlinkEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        var deleteEvent: Dictionary = [String: String]()
-
-        if let dir = msg.pointee.event.unlink.parent_dir?.pointee.path {
-            deleteEvent["dir"] = getString(tok: dir)
-        }
-        if let path = msg.pointee.event.unlink.target?.pointee.path {
-            deleteEvent["path"] = getString(tok: path)
-        }
-
-        cEvent.props = deleteEvent
-
-        callback(cEvent)
-    }
-
-    // swiftlint:disable:next cyclomatic_complexity function_body_length
     func eventDispatcher(msg: UnsafePointer<es_message_t>) {
         // Right now we are using the notify version of listeners, could change this in future
         // to support the auth versions. My concern for using auth is we are in a blocking path
         // any user provided callbacks will block pending io.
 
-        guard let proc: es_process_t = msg.pointee.process?.pointee else {
-            NSLog("Got bad event from ES")
-            return
-        }
-
+        let proc: es_process_t = msg.pointee.process.pointee
         var cEvent = CrescendoEvent()
 
-        guard let path = proc.executable?.pointee.path else {
-            NSLog("Missing executable path")
-            return
-        }
+        let path = proc.executable.pointee.path
 
         cEvent.processpath = getString(tok: path)
         cEvent.pid = audit_token_to_pid(proc.audit_token)
         cEvent.ppid = proc.ppid
-        cEvent.timestamp = Int(msg.pointee.time.tv_sec * 1000) + Int(msg.pointee.time.tv_nsec / 1000)
+        cEvent.timestamp = Int(msg.pointee.time.tv_sec * 1000) + Int(msg.pointee.time.tv_nsec / (1000 * 1000))
         cEvent.username = getUsername(id: audit_token_to_euid(proc.audit_token))
         cEvent.isplatform = proc.is_platform_binary
         cEvent.signingid = getString(tok: proc.signing_id)
 
         switch msg.pointee.event_type {
-        case ES_EVENT_TYPE_NOTIFY_EXEC:
+        case ES_EVENT_TYPE_AUTH_EXEC:
             cEvent.eventtype = "process::exec"
             parseProcEvent(msg: msg, cEvent: &cEvent)
         case ES_EVENT_TYPE_NOTIFY_CREATE:
