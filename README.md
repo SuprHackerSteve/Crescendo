@@ -111,6 +111,8 @@ I will cut releases for the compiled + signed app and include them in the Releas
 
 * If you wish to forcefully unload the system extension, there is a menu item named "Unload System Extension" that will unload it. This action may lead to odd side effects, only do it if you know what you are doing.
 
+* If you have added a process with blacklist and it is still allowed to execute, remember to check the _real full path_. Simply using the /Applications/Foo.app, will not be enough to prevent the execution.
+
 ---
 
 ## TODO
