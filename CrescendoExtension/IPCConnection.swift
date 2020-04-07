@@ -18,6 +18,7 @@ class IPCConnection: NSObject {
     weak var delegate: AppCommunication?
     static let shared = IPCConnection()
     var client: ESClient?
+    var heartBeat = 0.0
 
     func startListener(esclient: ESClient) {
         let machServiceName = extensionMachServiceName(from: Bundle.main)
@@ -42,11 +43,6 @@ class IPCConnection: NSObject {
                   delegate: AppCommunication,
                   completionHandler: @escaping (Bool) -> Void) {
         self.delegate = delegate
-        guard currentConnection == nil else {
-            NSLog("Already registered with the provider")
-            completionHandler(true)
-            return
-        }
         let machServiceName = extensionMachServiceName(from: bundle)
         NSLog("Trying to connect to service: %@", machServiceName)
 
@@ -56,6 +52,7 @@ class IPCConnection: NSObject {
         newConnection.remoteObjectInterface = NSXPCInterface(with: ProviderCommunication.self)
         currentConnection = newConnection
         newConnection.resume()
+        heartBeat = Date().timeIntervalSince1970
 
         guard let providerProxy = newConnection.remoteObjectProxyWithErrorHandler({ registerError in
             NSLog("Failed to register with the provider: %@", registerError.localizedDescription)
@@ -103,12 +100,25 @@ class IPCConnection: NSObject {
         return providerProxy.getBlacklist(withData: response)
     }
 
-    // drop events if no client is connected
     func sendEventToApp(newEvent event: String) {
         guard let connection = currentConnection else {
+            // check if we have not had a client connected for 180 seconds. If so, terminate the esclient.
+            if (Date().timeIntervalSince1970 - heartBeat) > 15 {
+                // app client has disconnected... disable Crescendo client
+                NSLog("Timeout reached. Deleting esclient.")
+                if self.client != nil {
+                    let ret = libCrescendo.disableCrescendo(esclient: self.client!)
+                    if ret != CrescendoError.success {
+                        NSLog("Failed to disable Crescendo listener")
+                    }
+                }
+                NSLog("Cresendo disabled.")
+                self.client = nil
+            }
             return
         }
 
+        heartBeat = Date().timeIntervalSince1970
         guard let appProxy = connection.remoteObjectProxyWithErrorHandler({ sendError in
             NSLog("Failed to sent event to app %@", sendError.localizedDescription)
             self.currentConnection = nil

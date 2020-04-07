@@ -123,7 +123,10 @@ public class ESClient {
     }
 
     func stopEventProducer() {
-        if connected {
+        if connected && client != nil {
+            if ES_RETURN_ERROR == es_unsubscribe(client!, self.subEvents, UInt32(self.subEvents.count)) {
+                NSLog("Failed to unsubscibe to ESF")
+            }
             if ES_RETURN_ERROR == es_delete_client(client!) {
                 NSLog("Unable to delete resources - ESF resource leak")
             }
