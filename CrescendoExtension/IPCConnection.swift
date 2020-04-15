@@ -18,7 +18,7 @@ class IPCConnection: NSObject {
     weak var delegate: AppCommunication?
     static let shared = IPCConnection()
     var client: ESClient?
-    var heartBeat = 0.0
+    var heartBeat = Date().timeIntervalSince1970
 
     func startListener(esclient: ESClient) {
         let machServiceName = extensionMachServiceName(from: Bundle.main)
@@ -43,6 +43,12 @@ class IPCConnection: NSObject {
                   delegate: AppCommunication,
                   completionHandler: @escaping (Bool) -> Void) {
         self.delegate = delegate
+        guard currentConnection == nil else {
+            NSLog("Already registered with the provider")
+            completionHandler(true)
+            return
+        }
+
         let machServiceName = extensionMachServiceName(from: bundle)
         NSLog("Trying to connect to service: %@", machServiceName)
 
@@ -107,7 +113,7 @@ class IPCConnection: NSObject {
                 // app client has disconnected... disable Crescendo client
                 NSLog("Timeout reached. Deleting esclient.")
                 if self.client != nil {
-                    let ret = libCrescendo.disableCrescendo(esclient: self.client!)
+                    let ret = disableCrescendo(esclient: self.client!)
                     if ret != CrescendoError.success {
                         NSLog("Failed to disable Crescendo listener")
                     }
@@ -150,9 +156,39 @@ extension IPCConnection: NSXPCListenerDelegate {
     }
 }
 
+func sender(event: CrescendoEvent) {
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    guard let data = try? encoder.encode(event)
+        else {
+            NSLog("Failed to seralize event")
+            return
+    }
+    guard let json = String(data: data, encoding: .utf8) else {
+        NSLog("Invalid json encode.")
+        return
+    }
+
+    IPCConnection.shared.sendEventToApp(newEvent: json)
+}
+
+func startCrescendoClient() -> ESClient {
+    let esclient = enableCrescendo(completion: sender)
+    if esclient.error != CrescendoError.success {
+        NSLog("Failed to create Crescendo listener.")
+    }
+
+    return esclient.client
+}
+
 extension IPCConnection: ProviderCommunication {
     func register(_ completionHandler: @escaping (Bool) -> Void) {
         NSLog("App client connected.")
+
+        if self.client == nil {
+            self.client = startCrescendoClient()
+            NSLog("Created esclient.")
+        }
         completionHandler(true)
     }
 
