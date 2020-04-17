@@ -55,6 +55,7 @@ public class ESClient {
     var connected: Bool
     var callback: (CrescendoEvent) -> Void
     let subEvents = [ES_EVENT_TYPE_AUTH_EXEC,
+                     ES_EVENT_TYPE_NOTIFY_EXIT,
                      ES_EVENT_TYPE_NOTIFY_CREATE,
                      ES_EVENT_TYPE_NOTIFY_KEXTLOAD,
                      ES_EVENT_TYPE_NOTIFY_MOUNT,
@@ -81,12 +82,10 @@ public class ESClient {
             return err
         }
 
-        let dispatchQueue = DispatchQueue(label: "esclient", qos: .userInitiated)
-        dispatchQueue.async {
+        let dispatchQueue = DispatchQueue(label: "esclient", qos: .default)
+        // using a sync dispatch queue instead of a async.
+        dispatchQueue.sync {
             let res = es_new_client(&client) { _, event in
-                if !self.connected {
-                    return
-                }
                 self.eventDispatcher(msg: event)
             }
 
@@ -97,14 +96,14 @@ public class ESClient {
                     return
                 }
                 NSLog("Failed to initialize ES client: \(res)")
-                exit(EXIT_FAILURE)
+                return
             }
 
             let ret = es_subscribe(client!, self.subEvents, UInt32(self.subEvents.count))
             if ret != ES_RETURN_SUCCESS {
                 err = ESClientError.failedSubscription
                 NSLog("Failed to subscribe to event source: \(ret)")
-                exit(EXIT_FAILURE)
+                return
             }
 
             self.client = client
@@ -124,6 +123,7 @@ public class ESClient {
 
     func stopEventProducer() {
         if connected && client != nil {
+            connected = false
             if ES_RETURN_ERROR == es_unsubscribe(client!, self.subEvents, UInt32(self.subEvents.count)) {
                 NSLog("Failed to unsubscibe to ESF")
             }
@@ -132,8 +132,6 @@ public class ESClient {
             }
             client = nil
         }
-
-        connected = false
     }
 
     func eventDispatcher(msg: UnsafePointer<es_message_t>) {
@@ -157,7 +155,10 @@ public class ESClient {
         switch msg.pointee.event_type {
         case ES_EVENT_TYPE_AUTH_EXEC:
             cEvent.eventtype = "process::exec"
-            parseProcEvent(msg: msg, cEvent: &cEvent)
+            parseProcAuthEvent(msg: msg, cEvent: &cEvent)
+        case ES_EVENT_TYPE_NOTIFY_EXIT:
+            cEvent.eventtype = "process::exit"
+            parseProcExitEvent(msg: msg, cEvent: &cEvent)
         case ES_EVENT_TYPE_NOTIFY_CREATE:
             cEvent.eventtype = "file::create"
             parseFileEvent(msg: msg, cEvent: &cEvent)

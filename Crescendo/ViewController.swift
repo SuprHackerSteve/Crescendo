@@ -366,7 +366,6 @@ class ViewController: NSViewController {
 
     // Handler for unloading the system extension. This should only be used for extreme situations.
     @IBAction func unloadSystemExtension(sender _: NSMenuItem) {
-        IPCConnection.shared.unregister()
         guard let extensionIdentifier = extensionBundle.bundleIdentifier else {
             NSLog("Unable to get bundle identifier.")
             return
@@ -382,7 +381,6 @@ class ViewController: NSViewController {
     //  We may want to unload the system extension but I'm not quite sure what the
     // "correct" state management looks like right now...
     @IBAction func stopListener(_: Any) {
-        IPCConnection.shared.unregister()
         status = .stopped
     }
 
