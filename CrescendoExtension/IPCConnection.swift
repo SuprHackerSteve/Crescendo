@@ -5,7 +5,6 @@ import libCrescendo
     func register(_ completionHandler: @escaping (Bool) -> Void)
     func updateBlacklist(items: [String])
     func getBlacklist(withData response: @escaping ([String]) -> Void)
-    func unregister()
 }
 
 @objc protocol AppCommunication {
@@ -21,7 +20,7 @@ class IPCConnection: NSObject {
 
     func startListener(esclient: ESClient) {
         let machServiceName = extensionMachServiceName(from: Bundle.main)
-        NSLog("Starting XPC listener for mach service %@", machServiceName)
+        NSLog("Starting XPC listener for mach service.")
 
         let newListener = NSXPCListener(machServiceName: machServiceName)
         newListener.delegate = self
@@ -33,7 +32,8 @@ class IPCConnection: NSObject {
     private func extensionMachServiceName(from bundle: Bundle) -> String {
         guard let networkExtensionKeys = bundle.object(forInfoDictionaryKey: "EndpointExtension") as? [String: Any],
             let machServiceName = networkExtensionKeys["MachServiceName"] as? String else {
-            fatalError("Mach service name is missing from the Info.plist")
+            NSLog("Mach service name is missing from the Info.plist")
+            return ""
         }
         return machServiceName
     }
@@ -47,6 +47,7 @@ class IPCConnection: NSObject {
             completionHandler(true)
             return
         }
+
         let machServiceName = extensionMachServiceName(from: bundle)
         NSLog("Trying to connect to service: %@", machServiceName)
 
@@ -63,7 +64,8 @@ class IPCConnection: NSObject {
             self.currentConnection = nil
             completionHandler(false)
         }) as? ProviderCommunication else {
-            fatalError("Failed to create a remote object proxy for the provider")
+            NSLog("Failed to create a remote object proxy for the provider")
+            return
         }
 
         providerProxy.register(completionHandler)
@@ -80,7 +82,8 @@ class IPCConnection: NSObject {
             NSLog("Failed to update blacklist %@", updateError.localizedDescription)
             self.currentConnection = nil
         }) as? ProviderCommunication else {
-            fatalError("Failed to create a remote object proxy for the app")
+            NSLog("Failed to create a remote object proxy for the app")
+            return
         }
 
         providerProxy.updateBlacklist(items: blockedItems)
@@ -97,15 +100,26 @@ class IPCConnection: NSObject {
             NSLog("Failed to get blacklist %@", updateError.localizedDescription)
             self.currentConnection = nil
         }) as? ProviderCommunication else {
-            fatalError("Failed to create a remote object proxy for the app")
+            NSLog("Failed to create a remote object proxy for the app")
+            return
         }
 
         return providerProxy.getBlacklist(withData: response)
     }
 
-    // drop events if no client is connected
+    func terminateESClient() {
+        if client != nil {
+            let ret = disableCrescendo(esclient: client!)
+            if ret != CrescendoError.success {
+                NSLog("Failed to disable Crescendo listener")
+            }
+        }
+        client = nil
+    }
+
     func sendEventToApp(newEvent event: String) {
         guard let connection = currentConnection else {
+            // no app client connected, do not attempt to send event.
             return
         }
 
@@ -113,7 +127,8 @@ class IPCConnection: NSObject {
             NSLog("Failed to sent event to app %@", sendError.localizedDescription)
             self.currentConnection = nil
         }) as? AppCommunication else {
-            fatalError("Failed to create a remote object proxy for the app")
+            NSLog("Failed to create a remote object proxy for the app")
+            return
         }
 
         appProxy.sendEventToApp(newEvent: event)
@@ -127,22 +142,54 @@ extension IPCConnection: NSXPCListenerDelegate {
         newConnection.remoteObjectInterface = NSXPCInterface(with: AppCommunication.self)
         newConnection.invalidationHandler = {
             self.currentConnection = nil
+            NSLog("App disconnected.")
+            self.terminateESClient()
         }
 
         newConnection.interruptionHandler = {
             self.currentConnection = nil
+            NSLog("App connection interrupt.")
         }
 
         currentConnection = newConnection
         newConnection.resume()
-
         return true
     }
+}
+
+func sender(event: CrescendoEvent) {
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    guard let data = try? encoder.encode(event)
+    else {
+        NSLog("Failed to seralize event")
+        return
+    }
+    guard let json = String(data: data, encoding: .utf8) else {
+        NSLog("Invalid json encode.")
+        return
+    }
+
+    IPCConnection.shared.sendEventToApp(newEvent: json)
+}
+
+func startCrescendoClient() -> ESClient {
+    let esclient = enableCrescendo(completion: sender)
+    if esclient.error != CrescendoError.success {
+        NSLog("Failed to create Crescendo listener.")
+    }
+
+    return esclient.client
 }
 
 extension IPCConnection: ProviderCommunication {
     func register(_ completionHandler: @escaping (Bool) -> Void) {
         NSLog("App client connected.")
+
+        if client == nil {
+            client = startCrescendoClient()
+            NSLog("Created esclient.")
+        }
         completionHandler(true)
     }
 
@@ -158,10 +205,5 @@ extension IPCConnection: ProviderCommunication {
             return
         }
         response(client.getCrescendoBlacklist())
-    }
-
-    func unregister() {
-        currentConnection = nil
-        NSLog("App client disconnected.")
     }
 }

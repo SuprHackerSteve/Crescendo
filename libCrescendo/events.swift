@@ -7,7 +7,6 @@ extension ESClient {
         let forkedProc: es_event_fork_t = msg.pointee.event.fork
         let proc = forkedProc.child.pointee
         cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
-
         callback(cEvent)
     }
 
@@ -134,11 +133,28 @@ extension ESClient {
         callback(cEvent)
     }
 
-    func parseProcEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
-        var decision = ES_AUTH_RESULT_ALLOW
-
+    func parseProcExitEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
         let proc: es_process_t = msg.pointee.process.pointee
         cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
+        callback(cEvent)
+    }
+
+    func parseProcAuthEvent(msg: UnsafePointer<es_message_t>, cEvent: inout CrescendoEvent) {
+        var decision = ES_AUTH_RESULT_ALLOW
+
+        let proc: es_process_t = msg.pointee.event.exec.target.pointee
+        cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
+
+        // overwrite the parent process items with the current target exec
+        let path = proc.executable.pointee.path
+
+        cEvent.processpath = getString(tok: path)
+        cEvent.pid = audit_token_to_pid(proc.audit_token)
+        cEvent.ppid = proc.ppid
+        cEvent.timestamp = Int(msg.pointee.time.tv_sec * 1000) + Int(msg.pointee.time.tv_nsec / (1000 * 1000))
+        cEvent.username = getUsername(id: audit_token_to_euid(proc.audit_token))
+        cEvent.isplatform = proc.is_platform_binary
+        cEvent.signingid = getString(tok: proc.signing_id)
 
         // Likely will need to be more complex about what I'm checking in the future.
         if blacklist.contains(cEvent.processpath) || blacklist.contains(cEvent.signingid) {
