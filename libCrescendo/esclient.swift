@@ -122,9 +122,9 @@ public class ESClient {
     }
 
     func stopEventProducer() {
-        if connected && client != nil {
+        if connected, client != nil {
             connected = false
-            if ES_RETURN_ERROR == es_unsubscribe(client!, self.subEvents, UInt32(self.subEvents.count)) {
+            if ES_RETURN_ERROR == es_unsubscribe(client!, subEvents, UInt32(subEvents.count)) {
                 NSLog("Failed to unsubscibe to ESF")
             }
             if ES_RETURN_ERROR == es_delete_client(client!) {

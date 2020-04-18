@@ -108,13 +108,13 @@ class IPCConnection: NSObject {
     }
 
     func terminateESClient() {
-        if self.client != nil {
-            let ret = disableCrescendo(esclient: self.client!)
+        if client != nil {
+            let ret = disableCrescendo(esclient: client!)
             if ret != CrescendoError.success {
                 NSLog("Failed to disable Crescendo listener")
             }
         }
-        self.client = nil
+        client = nil
     }
 
     func sendEventToApp(newEvent event: String) {
@@ -161,9 +161,9 @@ func sender(event: CrescendoEvent) {
     let encoder = JSONEncoder()
     encoder.outputFormatting = .prettyPrinted
     guard let data = try? encoder.encode(event)
-        else {
-            NSLog("Failed to seralize event")
-            return
+    else {
+        NSLog("Failed to seralize event")
+        return
     }
     guard let json = String(data: data, encoding: .utf8) else {
         NSLog("Invalid json encode.")
@@ -186,8 +186,8 @@ extension IPCConnection: ProviderCommunication {
     func register(_ completionHandler: @escaping (Bool) -> Void) {
         NSLog("App client connected.")
 
-        if self.client == nil {
-            self.client = startCrescendoClient()
+        if client == nil {
+            client = startCrescendoClient()
             NSLog("Created esclient.")
         }
         completionHandler(true)
@@ -206,5 +206,4 @@ extension IPCConnection: ProviderCommunication {
         }
         response(client.getCrescendoBlacklist())
     }
-
 }

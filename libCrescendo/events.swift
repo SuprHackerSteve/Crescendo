@@ -145,7 +145,7 @@ extension ESClient {
         let proc: es_process_t = msg.pointee.event.exec.target.pointee
         cEvent.props = getProcessProps(proc: proc, exec: msg.pointee.event.exec)
 
-        //overwrite the parent process items with the current target exec
+        // overwrite the parent process items with the current target exec
         let path = proc.executable.pointee.path
 
         cEvent.processpath = getString(tok: path)
