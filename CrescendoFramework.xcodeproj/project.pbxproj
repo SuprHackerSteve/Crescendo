@@ -11,6 +11,19 @@
 		08599B34241D2CCF000AD203 /* events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08599B33241D2CCF000AD203 /* events.swift */; };
 		08599B3A241D432A000AD203 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08599B39241D432A000AD203 /* Settings.swift */; };
 		08712F752410874D0086A73D /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 08712F742410874D0086A73D /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0898B6BD2456504600AA3148 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C48C4FE23BB846900A5B781 /* libEndpointSecurity.tbd */; };
+		0898B6BE2456505900AA3148 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B342742405AA5400457332 /* libbsm.tbd */; };
+		0898B6D8245652F800AA3148 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898B6D7245652F800AA3148 /* AppDelegate.swift */; };
+		0898B6DA245652F800AA3148 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898B6D9245652F800AA3148 /* ContentView.swift */; };
+		0898B6DC245652FA00AA3148 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0898B6DB245652FA00AA3148 /* Assets.xcassets */; };
+		0898B6DF245652FB00AA3148 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0898B6DE245652FA00AA3148 /* Preview Assets.xcassets */; };
+		0898B6E2245652FB00AA3148 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0898B6E0245652FB00AA3148 /* Main.storyboard */; };
+		0898B6E82456530A00AA3148 /* libCrescendo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C48C4DC23BB827B00A5B781 /* libCrescendo.framework */; };
+		0898B6E92456530A00AA3148 /* libCrescendo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C48C4DC23BB827B00A5B781 /* libCrescendo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0898B6ED2456531200AA3148 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C48C4FE23BB846900A5B781 /* libEndpointSecurity.tbd */; };
+		0898B6EE2456531900AA3148 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B342742405AA5400457332 /* libbsm.tbd */; };
+		08ADFE7524564D8D00FDEC14 /* libCrescendoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFE7424564D8D00FDEC14 /* libCrescendoTests.swift */; };
+		08ADFE7724564D8E00FDEC14 /* libCrescendo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C48C4DC23BB827B00A5B781 /* libCrescendo.framework */; };
 		08B342762405AA7800457332 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B342742405AA5400457332 /* libbsm.tbd */; };
 		08B3427A2406E3B000457332 /* SystemExtensionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B342792406E3B000457332 /* SystemExtensionHelpers.swift */; };
 		08B3427C2406E42F00457332 /* TableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3427B2406E42F00457332 /* TableViewHelper.swift */; };
@@ -40,6 +53,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0898B6EA2456530A00AA3148 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C48C4D323BB827B00A5B781 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C48C4DB23BB827B00A5B781;
+			remoteInfo = libCrescendo;
+		};
+		0898B6EF2456533900AA3148 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C48C4D323BB827B00A5B781 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0898B6D4245652F800AA3148;
+			remoteInfo = TestHost;
+		};
+		08ADFE7824564D8E00FDEC14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C48C4D323BB827B00A5B781 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C48C4DB23BB827B00A5B781;
+			remoteInfo = libCrescendo;
+		};
 		4C5214A123F24EF000EAE5B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4C48C4D323BB827B00A5B781 /* Project object */;
@@ -64,6 +98,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0898B6EC2456530A00AA3148 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0898B6E92456530A00AA3148 /* libCrescendo.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4C2669B923F202510073CB7A /* Embed System Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -84,6 +129,17 @@
 		08712F722410874B0086A73D /* Crescendo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Crescendo-Bridging-Header.h"; sourceTree = "<group>"; };
 		08712F732410874C0086A73D /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PFMoveApplication.h; path = ThirdParty/PFMoveApplication.h; sourceTree = "<group>"; };
 		08712F742410874D0086A73D /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PFMoveApplication.m; path = ThirdParty/PFMoveApplication.m; sourceTree = "<group>"; };
+		0898B6D5245652F800AA3148 /* TestHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0898B6D7245652F800AA3148 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0898B6D9245652F800AA3148 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0898B6DB245652FA00AA3148 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0898B6DE245652FA00AA3148 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0898B6E1245652FB00AA3148 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0898B6E3245652FB00AA3148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0898B6E4245652FB00AA3148 /* TestHost.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestHost.entitlements; sourceTree = "<group>"; };
+		08ADFE7224564D8D00FDEC14 /* libCrescendoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libCrescendoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		08ADFE7424564D8D00FDEC14 /* libCrescendoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = libCrescendoTests.swift; sourceTree = "<group>"; };
+		08ADFE7624564D8D00FDEC14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08B342722405AA1800457332 /* libswiftDarwin.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDarwin.tbd; path = usr/lib/swift/libswiftDarwin.tbd; sourceTree = SDKROOT; };
 		08B342732405AA2700457332 /* libsystem_darwin.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsystem_darwin.tbd; path = usr/lib/system/libsystem_darwin.tbd; sourceTree = SDKROOT; };
 		08B342742405AA5400457332 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
@@ -112,13 +168,31 @@
 		4C52149F23F24EF000EAE5B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C5214A023F24EF000EAE5B5 /* CrescendoExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CrescendoExtension.entitlements; sourceTree = "<group>"; };
 		4C5E1CE923C2BC9C001DAEFA /* libproc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libproc.tbd; path = usr/lib/libproc.tbd; sourceTree = SDKROOT; };
-		4C7A5C1723F20AB300048CB0 /* crescendo-cli.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "crescendo-cli.entitlements"; sourceTree = "<group>"; };
-		4C7A5C1D23F20B3300048CB0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4CA1851A23EF0CA800B00520 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		4CFE19F523F2512700EBDF0E /* IPCConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0898B6D2245652F800AA3148 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0898B6EE2456531900AA3148 /* libbsm.tbd in Frameworks */,
+				0898B6E82456530A00AA3148 /* libCrescendo.framework in Frameworks */,
+				0898B6ED2456531200AA3148 /* libEndpointSecurity.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08ADFE6F24564D8D00FDEC14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0898B6BE2456505900AA3148 /* libbsm.tbd in Frameworks */,
+				0898B6BD2456504600AA3148 /* libEndpointSecurity.tbd in Frameworks */,
+				08ADFE7724564D8E00FDEC14 /* libCrescendo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4C26976323BCFDDB0031487C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -155,6 +229,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0898B6D6245652F800AA3148 /* TestHost */ = {
+			isa = PBXGroup;
+			children = (
+				0898B6D7245652F800AA3148 /* AppDelegate.swift */,
+				0898B6D9245652F800AA3148 /* ContentView.swift */,
+				0898B6DB245652FA00AA3148 /* Assets.xcassets */,
+				0898B6E0245652FB00AA3148 /* Main.storyboard */,
+				0898B6E3245652FB00AA3148 /* Info.plist */,
+				0898B6E4245652FB00AA3148 /* TestHost.entitlements */,
+				0898B6DD245652FA00AA3148 /* Preview Content */,
+			);
+			path = TestHost;
+			sourceTree = "<group>";
+		};
+		0898B6DD245652FA00AA3148 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				0898B6DE245652FA00AA3148 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		08ADFE7324564D8D00FDEC14 /* libCrescendoTests */ = {
+			isa = PBXGroup;
+			children = (
+				08ADFE7424564D8D00FDEC14 /* libCrescendoTests.swift */,
+				08ADFE7624564D8D00FDEC14 /* Info.plist */,
+			);
+			path = libCrescendoTests;
+			sourceTree = "<group>";
+		};
 		4C26976723BCFDDB0031487C /* Crescendo */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,8 +284,9 @@
 			children = (
 				4C48C4DE23BB827B00A5B781 /* libCrescendo */,
 				4C26976723BCFDDB0031487C /* Crescendo */,
-				4C7A5C1123F20AA200048CB0 /* crescendo-cli */,
 				4C52149A23F24EEF00EAE5B5 /* CrescendoExtension */,
+				08ADFE7324564D8D00FDEC14 /* libCrescendoTests */,
+				0898B6D6245652F800AA3148 /* TestHost */,
 				4C48C4DD23BB827B00A5B781 /* Products */,
 				4C48C4FD23BB846900A5B781 /* Frameworks */,
 			);
@@ -192,6 +298,8 @@
 				4C48C4DC23BB827B00A5B781 /* libCrescendo.framework */,
 				4C26976623BCFDDB0031487C /* Crescendo.app */,
 				4C52149823F24EEF00EAE5B5 /* com.suprhackersteve.crescendo.CrescendoExtension.systemextension */,
+				08ADFE7224564D8D00FDEC14 /* libCrescendoTests.xctest */,
+				0898B6D5245652F800AA3148 /* TestHost.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,15 +346,6 @@
 			path = CrescendoExtension;
 			sourceTree = "<group>";
 		};
-		4C7A5C1123F20AA200048CB0 /* crescendo-cli */ = {
-			isa = PBXGroup;
-			children = (
-				4C7A5C1723F20AB300048CB0 /* crescendo-cli.entitlements */,
-				4C7A5C1D23F20B3300048CB0 /* main.swift */,
-			);
-			path = "crescendo-cli";
-			sourceTree = "<group>";
-		};
 		4CD40B2623BB9514003C8B85 /* EndpointModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +369,44 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		0898B6D4245652F800AA3148 /* TestHost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0898B6E5245652FB00AA3148 /* Build configuration list for PBXNativeTarget "TestHost" */;
+			buildPhases = (
+				0898B6D1245652F800AA3148 /* Sources */,
+				0898B6D2245652F800AA3148 /* Frameworks */,
+				0898B6D3245652F800AA3148 /* Resources */,
+				0898B6EC2456530A00AA3148 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0898B6EB2456530A00AA3148 /* PBXTargetDependency */,
+			);
+			name = TestHost;
+			productName = TestHost;
+			productReference = 0898B6D5245652F800AA3148 /* TestHost.app */;
+			productType = "com.apple.product-type.application";
+		};
+		08ADFE7124564D8D00FDEC14 /* libCrescendoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08ADFE7A24564D8E00FDEC14 /* Build configuration list for PBXNativeTarget "libCrescendoTests" */;
+			buildPhases = (
+				08ADFE6E24564D8D00FDEC14 /* Sources */,
+				08ADFE6F24564D8D00FDEC14 /* Frameworks */,
+				08ADFE7024564D8D00FDEC14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08ADFE7924564D8E00FDEC14 /* PBXTargetDependency */,
+				0898B6F02456533900AA3148 /* PBXTargetDependency */,
+			);
+			name = libCrescendoTests;
+			productName = libCrescendoTests;
+			productReference = 08ADFE7224564D8D00FDEC14 /* libCrescendoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4C26976523BCFDDB0031487C /* Crescendo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C26977823BCFDDE0031487C /* Build configuration list for PBXNativeTarget "Crescendo" */;
@@ -333,9 +470,16 @@
 		4C48C4D323BB827B00A5B781 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1140;
 				TargetAttributes = {
+					0898B6D4245652F800AA3148 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+					08ADFE7124564D8D00FDEC14 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = 0898B6D4245652F800AA3148;
+					};
 					4C26976523BCFDDB0031487C = {
 						CreatedOnToolsVersion = 11.3;
 						LastSwiftMigration = 1130;
@@ -365,11 +509,30 @@
 				4C48C4DB23BB827B00A5B781 /* libCrescendo */,
 				4C26976523BCFDDB0031487C /* Crescendo */,
 				4C52149723F24EEF00EAE5B5 /* CrescendoExtension */,
+				08ADFE7124564D8D00FDEC14 /* libCrescendoTests */,
+				0898B6D4245652F800AA3148 /* TestHost */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0898B6D3245652F800AA3148 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0898B6E2245652FB00AA3148 /* Main.storyboard in Resources */,
+				0898B6DF245652FB00AA3148 /* Preview Assets.xcassets in Resources */,
+				0898B6DC245652FA00AA3148 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08ADFE7024564D8D00FDEC14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4C26976423BCFDDB0031487C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -416,6 +579,23 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0898B6D1245652F800AA3148 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0898B6DA245652F800AA3148 /* ContentView.swift in Sources */,
+				0898B6D8245652F800AA3148 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08ADFE6E24564D8D00FDEC14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08ADFE7524564D8D00FDEC14 /* libCrescendoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4C26976223BCFDDB0031487C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -453,6 +633,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0898B6EB2456530A00AA3148 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C48C4DB23BB827B00A5B781 /* libCrescendo */;
+			targetProxy = 0898B6EA2456530A00AA3148 /* PBXContainerItemProxy */;
+		};
+		0898B6F02456533900AA3148 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0898B6D4245652F800AA3148 /* TestHost */;
+			targetProxy = 0898B6EF2456533900AA3148 /* PBXContainerItemProxy */;
+		};
+		08ADFE7924564D8E00FDEC14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C48C4DB23BB827B00A5B781 /* libCrescendo */;
+			targetProxy = 08ADFE7824564D8E00FDEC14 /* PBXContainerItemProxy */;
+		};
 		4C5214A223F24EF000EAE5B5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4C52149723F24EEF00EAE5B5 /* CrescendoExtension */;
@@ -470,7 +665,104 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		0898B6E0245652FB00AA3148 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0898B6E1245652FB00AA3148 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		0898B6E6245652FB00AA3148 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TestHost/TestHost.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"TestHost/Preview Content\"";
+				DEVELOPMENT_TEAM = AD94776VX5;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TestHost/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.TestHost;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0898B6E7245652FB00AA3148 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TestHost/TestHost.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"TestHost/Preview Content\"";
+				DEVELOPMENT_TEAM = AD94776VX5;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TestHost/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.TestHost;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		08ADFE7B24564D8E00FDEC14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = CrescendoExtension/CrescendoExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = libCrescendoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.libCrescendoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHost.app/Contents/MacOS/TestHost";
+			};
+			name = Debug;
+		};
+		08ADFE7C24564D8E00FDEC14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = CrescendoExtension/CrescendoExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = libCrescendoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.suprhackersteve.libCrescendoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHost.app/Contents/MacOS/TestHost";
+			};
+			name = Release;
+		};
 		4C26977623BCFDDE0031487C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -782,6 +1074,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0898B6E5245652FB00AA3148 /* Build configuration list for PBXNativeTarget "TestHost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0898B6E6245652FB00AA3148 /* Debug */,
+				0898B6E7245652FB00AA3148 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08ADFE7A24564D8E00FDEC14 /* Build configuration list for PBXNativeTarget "libCrescendoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08ADFE7B24564D8E00FDEC14 /* Debug */,
+				08ADFE7C24564D8E00FDEC14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4C26977823BCFDDE0031487C /* Build configuration list for PBXNativeTarget "Crescendo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -95,6 +95,10 @@ public class ESClient {
                     err = ESClientError.missingEntitlements
                     return
                 }
+                if res == ES_NEW_CLIENT_RESULT_ERR_NOT_PERMITTED {
+                    NSLog("Permission denied on es_new_client.")
+                    err = ESClientError.newClientError
+                }
                 NSLog("Failed to initialize ES client: \(res)")
                 return
             }
