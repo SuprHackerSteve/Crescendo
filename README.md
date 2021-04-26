@@ -22,10 +22,10 @@
 
 Apple has introduced some new security mechanisms that we need to enable to get Crescendo running.
 
-1. Ensure that you have moved the app to your /Applications director or the system extension will fail to load.
+1. Ensure that you have moved the app to your /Applications directory or the system extension will fail to load.
 2. For the first run you will be prompted to approve the system extension, after clicking the "Start" button.
 
-   _NOTE: I have noticed that there is an issue where System Preferences won't show an allow button. I assume this is some internal issue Apple needs to workout. Clicking back to System Preferences and navigating forward again seems to fix the issue._
+   _NOTE: I have noticed that there is an issue where System Preferences won't show an allow button. I assume this is some internal issue Apple needs to work out. Clicking back to System Preferences and navigating forward again seems to fix the issue._
 
    ![Sysext](assets/sysext.png)
    ![Allow](assets/allow.png)
