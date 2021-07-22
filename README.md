@@ -75,7 +75,7 @@ systemextensionsctl developer on
 
 ## Signing
 
-If you wish to sign your own application, it is highly recommend to read Apple's documentation on [System Extension](https://developer.apple.com/documentation/systemextensions) requirements and [Notorization](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution).
+If you wish to sign your own application, it is highly recommend to read Apple's documentation on [System Extension](https://developer.apple.com/documentation/systemextensions) requirements and [Notarization](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution).
 
 **Signing and entitlement is a non-trivial exercise.**
 
